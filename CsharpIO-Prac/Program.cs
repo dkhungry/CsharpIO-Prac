@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 
 namespace CsharpIO_Prac
 {
@@ -6,7 +7,7 @@ namespace CsharpIO_Prac
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            
         }
     }
 }
