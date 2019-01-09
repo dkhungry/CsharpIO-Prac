@@ -14,6 +14,7 @@ namespace CsharpIO_Prac
         public int ShotsOnGoal { get; set; }
         public int ShotsOffGoal { get; set; }
         public double PosessionPercent { get; set; }
+        public double ConversionRate => (double)Goals / GoalAttempts;
     }
 
     public enum HomeOrAway

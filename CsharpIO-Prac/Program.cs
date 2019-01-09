@@ -64,13 +64,12 @@ namespace CsharpIO_Prac
                     {
                         gameResult.ShotsOffGoal = parseInt;
                     }
-                    soccerResults.Add(gameResult);
-
                     double parseDouble;
                     if(double.TryParse(values[7], out parseDouble))
                     {
                         gameResult.PosessionPercent = parseDouble;
                     }
+                    soccerResults.Add(gameResult);
                 }
             }
 
