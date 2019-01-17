@@ -16,11 +16,15 @@ namespace CsharpIO_Prac
             var fileContents = ReadSoccerResults(fileName);
             var playerFile = Path.Combine(directory.FullName, "players.json");
             var players = DeserializePlayers(playerFile);
+            var topTen = GetTopTenPlayers(players);
 
             foreach(var player in players)
             {
                 Console.WriteLine(player.FirstName);
             }
+
+            var writeFile = Path.Combine(directory.FullName, "topten.json");
+            SerializePlayerToFile(topTen, writeFile);
         }
 
         public static string ReadFile(string fileName)
@@ -95,6 +99,32 @@ namespace CsharpIO_Prac
             }
 
             return players;
+        }
+
+        public static List<Player> GetTopTenPlayers(List<Player> players)
+        {
+            var TopTen = new List<Player>();
+            players.Sort(new PlayerComparer());
+            int counter = 0;
+            foreach(var player in players)
+            {
+                TopTen.Add(player);
+                counter++;
+                if (counter == 10)
+                    break;
+            }
+
+            return TopTen;
+        }
+
+        public static void SerializePlayerToFile(List<Player> players, string fileName)
+        {
+            var serializer = new JsonSerializer();
+            using (var writer = new StreamWriter(fileName))
+            using (var jsonWriter = new JsonTextWriter(writer))
+            {
+                serializer.Serialize(jsonWriter, players);
+            }
         }
     }
 }
