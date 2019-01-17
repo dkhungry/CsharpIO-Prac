@@ -2,6 +2,7 @@
 using System.IO;
 using System.Collections.Generic;
 using Newtonsoft.Json;
+using System.Net;
 
 namespace CsharpIO_Prac
 {
@@ -25,6 +26,8 @@ namespace CsharpIO_Prac
 
             var writeFile = Path.Combine(directory.FullName, "topten.json");
             SerializePlayerToFile(topTen, writeFile);
+
+            Console.WriteLine(GetGoogleHomepage());
         }
 
         public static string ReadFile(string fileName)
@@ -125,6 +128,28 @@ namespace CsharpIO_Prac
             {
                 serializer.Serialize(jsonWriter, players);
             }
+        }
+
+        public static string GetGoogleHomepage()
+        {
+            string homepage;
+            using (var webclient = new WebClient())
+            { 
+                homepage = webclient.DownloadString("https://www.google.com");
+            }
+            return homepage;
+        }
+
+        public static string GetPlayerNews(string playerName)
+        {
+            string results;
+            const string uriBase = "https://api.cognitive.microsoft.com/bing/v7.0/search";
+            const string key = "";
+            using (var webclient = new WebClient())
+            {
+                results = webclient.DownloadString("https://www.google.com");
+            }
+            return results;
         }
     }
 }
